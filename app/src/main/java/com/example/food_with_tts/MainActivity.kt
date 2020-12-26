@@ -27,7 +27,9 @@ class MainActivity : AppCompatActivity() {
     private val currentTime = Calendar.getInstance().time
     private val time = SimpleDateFormat("YYYYMMdd", Locale.KOREA).format(currentTime)
 
-    var foodInfo : String? = null
+    var breakfastInfo : String? = null
+    var lunchInfo : String? = null
+    var dinnerInfo : String? = null
 
     private var resultText : String? = null
     private var textToSpeech : TextToSpeech? = null
@@ -69,10 +71,14 @@ class MainActivity : AppCompatActivity() {
         ).enqueue(object : Callback<FoodBase>{
             override fun onResponse(call: Call<FoodBase>, response: Response<FoodBase>) {
 
-                var res = response.body()?.mealServiceDietInfo?.get(1)?.row?.get(0)
+                var res = response.body()?.mealServiceDietInfo?.get(1)?.row
                 val regex = Regex("[0-9]+.")
 
-                foodInfo = regex.replace(res?.DDISH_NM ?: return, "")
+                breakfastInfo = regex.replace(res?.get(0)?.DDISH_NM ?: return, "")
+                        .replace("<br/>", "\n")
+                lunchInfo = regex.replace(res?.get(1)?.DDISH_NM ?: return, "")
+                        .replace("<br/>", "\n")
+                dinnerInfo = regex.replace(res?.get(2)?.DDISH_NM ?: return, "")
                         .replace("<br/>", "\n")
             }
 
@@ -117,13 +123,33 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun TextInfo(){
-        if(textView.text == "내일 급식 알려 줘"){
-            resultText = "몰라염"
+        when(textView.text){
+            "오늘 급식 알려 줘"->{
+                resultText = "아침 점심 저녁중 어느 급식을 알려드릴까요?"
+            }
+            "아침 급식 알려 줘"->{
+                if(breakfastInfo == null){
+                    breakfastInfo = "아침급식이 없는날"
+                }
+                resultText = breakfastInfo+"입니다."
+            }
+            "점심 급식 알려 줘"->{
+                if(lunchInfo == null){
+                    lunchInfo = "점심급식이 없는날"
+                }
+                resultText = lunchInfo+"입니다."
+            }
+            "저녁 급식 알려 줘"->{
+                if(dinnerInfo == null){
+                dinnerInfo = "저녁급식이 없는날"
+            }
+                resultText = dinnerInfo+"입니다."
+            }
         }
     }
 
     private fun Speech() {  //TTS
-        val text = foodInfo
+        val text = resultText
         Log.d("Logd", "TTS")
         textToSpeech?.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)// API 20
     }
