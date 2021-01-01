@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
     private fun getfood(){
         FoodClient.retrofitService2.getTomorrowFood(
                 "e40fc13904d84da4a8d398649c324133", "JSON", "1", "100",
-                "D10", "7240393", "" + time
+                intent.getStringExtra("eduCode")?:"", intent.getStringExtra("schoolCode")?:"", time
         ).enqueue(object : Callback<FoodBase>{
             override fun onResponse(call: Call<FoodBase>, response: Response<FoodBase>) {
 
