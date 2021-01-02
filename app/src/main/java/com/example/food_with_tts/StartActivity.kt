@@ -71,6 +71,7 @@ class StartActivity : AppCompatActivity() {
                     startActivity(Intent(this@StartActivity, MainActivity::class.java).apply {
                         putExtra("eduCode",eduCode)
                         putExtra("schoolCode", schoolCode)
+                        putExtra("schoolName", schoolInfo_Tv.text)
                     })
                 }
 

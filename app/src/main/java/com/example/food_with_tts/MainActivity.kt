@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        schoolName.text = intent.getStringExtra("schoolName")
         getfood()
 
         voiceBtn.setOnClickListener {
