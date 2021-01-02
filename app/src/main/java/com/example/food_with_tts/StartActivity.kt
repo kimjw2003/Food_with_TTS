@@ -53,7 +53,7 @@ class StartActivity : AppCompatActivity() {
                     //음성 톤
                     textToSpeech?.setPitch(1.0f)
                     //읽는 속도
-                    textToSpeech?.setSpeechRate(0.6f)
+                    textToSpeech?.setSpeechRate(0.8f)
                 }
             }
         }
@@ -85,7 +85,7 @@ class StartActivity : AppCompatActivity() {
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Hi speak something")
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "다니시는 학교를 말하여 주세요")
 
         try{
             startActivityForResult(intent, REQUEST_CODE_SPEECH_INPUT)

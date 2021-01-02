@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                     //음성 톤
                     textToSpeech?.setPitch(1.0f)
                     //읽는 속도
-                    textToSpeech?.setSpeechRate(0.6f)
+                    textToSpeech?.setSpeechRate(0.8f)
                 }
             }
         }
@@ -127,23 +127,26 @@ class MainActivity : AppCompatActivity() {
             "오늘 급식 알려 줘"->{
                 resultText = "아침 점심 저녁중 어느 급식을 알려드릴까요?"
             }
-            "아침 급식 알려 줘"->{
+            "아침 급식 알려 줘 뭐야 밥"->{
                 if(breakfastInfo == null){
                     breakfastInfo = "아침급식이 없는날"
                 }
                 resultText = breakfastInfo+"입니다."
+                Log.d("Logd", "breakfast : ${breakfastInfo}")
             }
-            "점심 급식 알려 줘"->{
+            "점심 급식 알려 줘 뭐야 밥"->{
                 if(lunchInfo == null){
                     lunchInfo = "점심급식이 없는날"
                 }
                 resultText = lunchInfo+"입니다."
+                Log.d("Logd", "lunch : ${lunchInfo}")
             }
-            "저녁 급식 알려 줘"->{
+            "저녁 급식 알려 줘 뭐야 밥"->{
                 if(dinnerInfo == null){
                 dinnerInfo = "저녁급식이 없는날"
             }
                 resultText = dinnerInfo+"입니다."
+                Log.d("Logd", "dinner : ${dinnerInfo}")
             }
         }
     }
