@@ -63,6 +63,8 @@ class StartActivity : AppCompatActivity() {
         SchoolClient.retrofitService.getSchoolInfo("9289a1f6821e456a8c84bdc3c9fbc523", "JSON", "1", "100", schoolInfo_Tv.text.toString())
             .enqueue(object : Callback<SchoolBase>{
                 override fun onResponse(call: Call<SchoolBase>, response: Response<SchoolBase>) {
+                    Log.d("Logd", "getSchool onResponse")
+
                     eduCode = response.body()?.schoolInfo?.get(1)?.row?.get(0)?.ATPT_OFCDC_SC_CODE
                     schoolCode = response.body()?.schoolInfo?.get(1)?.row?.get(0)?.SD_SCHUL_CODE
 
@@ -76,7 +78,7 @@ class StartActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<SchoolBase>, t: Throwable) {
-
+                    Log.d("Logd", t.message.toString())
                 }
 
             })
@@ -86,7 +88,7 @@ class StartActivity : AppCompatActivity() {
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "다니시는 학교를 말하여 주세요")
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "다니시는 학교가 어디이신가요?")
 
         try{
             startActivityForResult(intent, REQUEST_CODE_SPEECH_INPUT)

@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Hi speak something")
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "무엇을 도와드릴까요?")
 
         try{
             startActivityForResult(intent, REQUEST_CODE_SPEECH_INPUT)
@@ -108,7 +108,6 @@ class MainActivity : AppCompatActivity() {
         when(requestCode){
             REQUEST_CODE_SPEECH_INPUT -> {
                 if(resultCode == Activity.RESULT_OK && null != data){
-                    //음성데이터를 텍스트뷰에 입력
                     val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
                     textView.text = result!![0]
 
@@ -128,21 +127,21 @@ class MainActivity : AppCompatActivity() {
             "오늘 급식 알려 줘"->{
                 resultText = "아침 점심 저녁중 어느 급식을 알려드릴까요?"
             }
-            "아침 급식 알려 줘 뭐야 밥"->{
+            "아침 급식 알려 줘"->{
                 if(breakfastInfo == null){
                     breakfastInfo = "아침급식이 없는날"
                 }
                 resultText = breakfastInfo+"입니다."
                 Log.d("Logd", "breakfast : ${breakfastInfo}")
             }
-            "점심 급식 알려 줘 뭐야 밥"->{
+            "점심 급식 알려 줘"->{
                 if(lunchInfo == null){
                     lunchInfo = "점심급식이 없는날"
                 }
                 resultText = lunchInfo+"입니다."
                 Log.d("Logd", "lunch : ${lunchInfo}")
             }
-            "저녁 급식 알려 줘 뭐야 밥"->{
+            "저녁 급식 알려 줘"->{
                 if(dinnerInfo == null){
                 dinnerInfo = "저녁급식이 없는날"
             }
