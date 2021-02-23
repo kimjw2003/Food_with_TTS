@@ -123,32 +123,33 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun TextInfo(){
-        when(textView.text){
-            "오늘 급식 알려 줘"->{
-                resultText = "아침 점심 저녁중 어느 급식을 알려드릴까요?"
+        if(textView.text.contains("오늘 급식")){
+            resultText = "아침 점심 저녁중 어느 급식을 알려드릴까요?"
+        } else if(textView.text.contains("아침 급식")){
+
+            if(breakfastInfo == null){
+                breakfastInfo = "아침급식이 없는날"
             }
-            "아침 급식 알려 줘"->{
-                if(breakfastInfo == null){
-                    breakfastInfo = "아침급식이 없는날"
-                }
-                resultText = breakfastInfo+"입니다."
-                Log.d("Logd", "breakfast : ${breakfastInfo}")
+            resultText = breakfastInfo+"입니다."
+            Log.d("Logd", "breakfast : ${breakfastInfo}")
+
+        } else if(textView.text.contains("점심 급식")){
+
+            if(lunchInfo == null){
+                lunchInfo = "점심급식이 없는날"
             }
-            "점심 급식 알려 줘"->{
-                if(lunchInfo == null){
-                    lunchInfo = "점심급식이 없는날"
-                }
-                resultText = lunchInfo+"입니다."
-                Log.d("Logd", "lunch : ${lunchInfo}")
-            }
-            "저녁 급식 알려 줘"->{
-                if(dinnerInfo == null){
+            resultText = lunchInfo+"입니다."
+            Log.d("Logd", "lunch : ${lunchInfo}")
+
+        } else if(textView.text.contains("저녁 급식")){
+
+            if(dinnerInfo == null){
                 dinnerInfo = "저녁급식이 없는날"
             }
-                resultText = dinnerInfo+"입니다."
-                Log.d("Logd", "dinner : ${dinnerInfo}")
-            }
+            resultText = dinnerInfo+"입니다."
+            Log.d("Logd", "dinner : ${dinnerInfo}")
         }
+
     }
 
     private fun Speech() {  //TTS

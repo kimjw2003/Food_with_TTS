@@ -57,7 +57,7 @@ class StartActivity : AppCompatActivity() {
                 }
             }
         }
-    } //onCreate,
+    } //onCreate
 
     private fun getSchool(){
         SchoolClient.retrofitService.getSchoolInfo("9289a1f6821e456a8c84bdc3c9fbc523", "JSON", "1", "100", schoolInfo_Tv.text.toString())
@@ -107,8 +107,6 @@ class StartActivity : AppCompatActivity() {
                     val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
                     schoolInfo_Tv.text = result!![0]
                     getSchool()
-
-
                 }
             }
         }
