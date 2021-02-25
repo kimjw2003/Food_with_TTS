@@ -60,10 +60,11 @@ class StartActivity : AppCompatActivity() {
     } //onCreate
 
     private fun getSchool(){
-        SchoolClient.retrofitService.getSchoolInfo("9289a1f6821e456a8c84bdc3c9fbc523", "JSON", "1", "100", schoolInfo_Tv.text.toString())
+        SchoolClient.retrofitService.getSchoolInfo("9289a1f6821e456a8c84bdc3c9fbc523", "JSON", "1", "100", schoolInfo_Tv.text.toString().replace(" ", ""))
             .enqueue(object : Callback<SchoolBase>{
                 override fun onResponse(call: Call<SchoolBase>, response: Response<SchoolBase>) {
                     Log.d("Logd", "getSchool onResponse")
+                    Log.d("Logd", "searched school is : ${schoolInfo_Tv.text}")
 
                     eduCode = response.body()?.schoolInfo?.get(1)?.row?.get(0)?.ATPT_OFCDC_SC_CODE
                     schoolCode = response.body()?.schoolInfo?.get(1)?.row?.get(0)?.SD_SCHUL_CODE

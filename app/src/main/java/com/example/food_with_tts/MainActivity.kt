@@ -148,6 +148,9 @@ class MainActivity : AppCompatActivity() {
             }
             resultText = dinnerInfo+"입니다."
             Log.d("Logd", "dinner : ${dinnerInfo}")
+        } else{
+            resultText = "다시 한번 말씀해 주십시오"
+            Log.d("Logd", "no message")
         }
 
     }
