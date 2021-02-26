@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.speech.tts.TextToSpeech
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.example.food_with_tts.data.FoodBase
 import com.example.food_with_tts.retrofit.FoodClient
@@ -31,6 +34,8 @@ class MainActivity : AppCompatActivity() {
     var lunchInfo : String? = null
     var dinnerInfo : String? = null
 
+    var voice : String? = null
+
     private var resultText : String? = null
     private var textToSpeech : TextToSpeech? = null
     private val REQUEST_CODE_SPEECH_INPUT = 100
@@ -44,6 +49,22 @@ class MainActivity : AppCompatActivity() {
 
         voiceBtn.setOnClickListener {
             speak()
+        }
+
+        //스피너 값 내용
+        var voiceList = listOf("1.0f", "2.0f")
+
+        //스피너 값에따라 내용 달라지게 하기
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, voiceList)
+        voice_Sp.adapter = adapter
+        voice_Sp.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedValue = voiceList[position]
+                voice = selectedValue
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
         }
 
         textToSpeech = TextToSpeech(this) { status ->
