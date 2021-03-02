@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         //스피너 값 내용
-        var voiceList = listOf("1.0f", "2.0f")
+        var voiceList = listOf(0.5f, 1.0f, 1.5f, 2.0f)
 
         //스피너 값에따라 내용 달라지게 하기
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, voiceList)
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         voice_Sp.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedValue = voiceList[position]
-                voice = selectedValue
+                voice = selectedValue.toString()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     Log.d("Logd", "음성허용")
                     //음성 톤
-                    textToSpeech?.setPitch(1.0f)
+                    textToSpeech?.setPitch(voice!!.toFloat())
                     //읽는 속도
                     textToSpeech?.setSpeechRate(0.8f)
                 }
